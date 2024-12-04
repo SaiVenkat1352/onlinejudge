@@ -6,7 +6,7 @@ import { cpp } from "@codemirror/lang-cpp";
 import { java } from "@codemirror/lang-java";
 import { python } from "@codemirror/lang-python";
 import { oneDark } from "@codemirror/theme-one-dark";
-
+//code editor
 function CodeEditor({ language, onChangeLanguage, value, onChangeValue }) {
   useEffect(() => {
     const defaultCode = {
