@@ -1,23 +1,26 @@
-const express = require('express');
-const userController = require('./../controllers/userController');
-const authController = require('./../controllers/authController');
+const express = require("express");
+const userController = require("../controllers/userController");
+const authController = require("../controllers/authController");
+const submissionController = require("../controllers/submissionController");
 
 const router = express.Router();
 
-//router.post('/signup', authController.signup);
-//router.post('/login', authController.login);
+router.post("/signup", authController.signup);
+router.post("/login", authController.login);
 
+router.post("/forgotPassword", authController.forgotPassword);
+router.patch("/resetPassword/:token", authController.resetPassword);
 
+router.patch(
+  "/updateMyPassword",
+  authController.protect,
+  authController.updatePassword
+);
 
-router
-  .route('/')
-  .get(userController.getAllUsers)
-  .post(userController.createUser);
+router.patch("/updateMe", authController.protect, userController.updateMe);
+router.delete("/deleteMe", authController.protect, userController.deleteMe);
 
-router
-  .route('/:id')
-  .get(userController.getUser)
-  .patch(userController.updateUser)
-  .delete(userController.deleteUser);
+router.post("/run", submissionController.compileCode);
+router.post("/submit", authController.protect);
 
 module.exports = router;
